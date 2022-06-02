@@ -1,0 +1,10 @@
+body{
+  background-color: darkcyan;
+}
+.App {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+}
+.un{
+  grid-column-start: 2;
+}
