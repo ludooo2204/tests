@@ -2,7 +2,7 @@
 import { css, jsx } from "@emotion/react";
 import { useSpring, to, animated } from "react-spring";
 import { useState } from "react";
-import { toto, Button, ShadowEffect1, textBlack, textBlue, textRed } from "./App.style";
+import { Button, MainContainer, TopContainer, blue, rotateOnHover, CenterContainer, BottomContainer } from "./App.style";
 
 function App2() {
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 } });
@@ -10,56 +10,62 @@ function App2() {
 	return <animated.div style={props}>I will fade in</animated.div>;
 }
 
-function App3() {
-	const { o, xyz, color } = useSpring({
-		from: { o: 0, xyz: [0, 0, 0], color: "red" },
-		o: 1,
-		xyz: [10, 20, 5],
-		color: "green",
-	});
-
+const Card = () => {
 	return (
-		<animated.div
-			style={{
-				// If you can, use plain animated values like always, ...
-				// You would do that in all cases where values "just fit"
-				color,
-				// Unless you need to interpolate them
-				background: o.to((o) => `rgba(210, 57, 77, ${o})`),
-				// Which works with arrays as well
-				transform: xyz.to((x, y, z) => `translate3d(${x}px, ${y}px, ${z}px)`),
-				// If you want to combine multiple values use the "interpolate" helper
-				border: to([o, color], (o, c) => `${o * 10}px solid ${c}`),
-				// You can also form ranges, even chain multiple interpolations
-				padding: o.to({ range: [0, 0.5, 1], output: [0, 0, 10] }).to((o) => `${o}%`),
-				// Interpolating strings (like up-front) through ranges is allowed ...
-				borderColor: o.to({ range: [0, 1], output: ["red", "#ffaabb"] }),
-				// There's also a shortcut for plain, optionless ranges ...
-				opacity: o.to([0.1, 0.2, 0.6, 1], [1, 0.1, 0.5, 1]),
-			}}
-		>
-			{o.to((n) => n.toFixed(2)) /* innerText interpolation ... */}
-		</animated.div>
+		<section id="D-parallax-effect">
+			<div class="container-3D">
+				<div class="D-box">
+					<div class="imgBx">
+						<img src="b1.jpg" alt="b1" width="550px" height="300px" />
+					</div>
+					<div class="contentBx">
+						<h2>Tilt Box Hover Effect</h2>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet dignissimos laudantium atque assumenda cupiditate quo nobis.</p>
+					</div>
+				</div>
+				<div class="D-box">
+					<div class="imgBx">
+						<img src="b2.jpg" alt="b2" width="550px" height="300px" />
+					</div>
+					<div class="contentBx">
+						<h2>Tilt Box Hover Effect</h2>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet dignissimos laudantium atque assumenda cupiditate quo nobis.</p>
+					</div>
+				</div>
+			</div>
+		</section>
 	);
-}
+};
 
 function App() {
-	const [hovered, setHovered] = useState(false);
-
+	const makeFullscreen = () => {
+		console.log("sdvk");
+		document.requestFullscreen();
+	};
 	return (
-		<>
-			{/* on peut composer des styles avec un array comme avec les classes et y mettre du js */}
-			<Button css={[textBlue, hovered ? textRed : textBlack]} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-				affichage conditionnel en js hover
-			</Button>
-			<App2 />
-			<App3 />
-			<Button css={[textBlue, hovered ? textRed : textBlack]} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-				affichage conditionnel en js hover
-			</Button>
-			<Button> media query &lt;420px</Button>
-			<div css={toto}>hover to change color</div>
-		</>
+		<MainContainer>
+			<TopContainer>
+				<Button css={rotateOnHover} onClick={makeFullscreen}>
+					bouton 1
+				</Button>
+				<Button css={rotateOnHover}>bouton 2</Button>
+				<Button css={[blue, rotateOnHover]}>bouton 3</Button>
+			</TopContainer>
+			<CenterContainer>
+				<input type="text"></input>
+
+				<img
+					css={css`
+						height: 20vw;
+					`}
+					src="/img/unicorn-g325b486a1_1920.png"
+					alt="licorne"
+				></img>
+			</CenterContainer>
+			<BottomContainer>
+				<Card />
+			</BottomContainer>
+		</MainContainer>
 	);
 }
 
