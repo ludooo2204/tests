@@ -2,7 +2,7 @@
 import { css, jsx } from "@emotion/react";
 import { useSpring, to, animated } from "react-spring";
 import { useState } from "react";
-import { Button, MainContainer, TopContainer, blue, rotateOnHover, CenterContainer, BottomContainer } from "./App.style";
+import { Button, Loader, MainContainer, TopContainer, blue, rotateOnHover, CenterContainer, BottomContainer } from "./App.style";
 
 function App2() {
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 } });
@@ -53,7 +53,19 @@ function App() {
 			</TopContainer>
 			<CenterContainer>
 				<input type="text"></input>
-
+				<div
+					css={css`
+						position: relative;
+						width: 100px;
+						height: 100px;
+						/* background-color: #333; */
+						display: flex;
+						justify-content: center;
+						align-items: center;
+					`}
+				>
+					<Loader />
+				</div>
 				<img
 					css={css`
 						height: 20vw;

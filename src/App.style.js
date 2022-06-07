@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
+import { css, jsx, keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const color = "hotpink";
@@ -67,4 +67,45 @@ export const licorneImg = styled.div`
 	justify-content: center;
 	flex: 1;
 	width: 100%;
+`;
+const spin = keyframes`
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+
+`;
+export const Loader = styled.div`
+	height: 60px;
+	width: 60px;
+	position: relative;
+	border-radius: 50%;
+	border: 3px solid transparent;
+	border-top-color: crimson;
+	animation: ${spin} 2s linear infinite;
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		border-radius: 50%;
+		border: 3px solid transparent;
+	}
+	&::before {
+		top: 3px;
+		left: 3px;
+		right: 3px;
+		bottom: 3px;
+		border-top-color: rgb(252, 45, 86);
+		animation: ${spin} 3s linear infinite;
+	}
+	&::after {
+		top: 8px;
+		left: 8px;
+		right: 8px;
+		bottom: 8px;
+		border-top-color: rgb(192, 108, 125);
+		animation: ${spin} 1.5s linear infinite;
+	}
 `;
