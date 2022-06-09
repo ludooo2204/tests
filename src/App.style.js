@@ -34,7 +34,8 @@ export const MainContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	max-height: 100vh;
+	min-height: 100vh;
+	height: 100%;
 	box-sizing: border-box;
 	flex-direction: column;
 `;
@@ -48,7 +49,7 @@ export const TopContainer = styled.div`
 export const CenterContainer = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-around;
 	flex: 3;
 	width: 100%;
 	border: 1px solid black;

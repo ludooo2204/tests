@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css, jsx } from "@emotion/react";
-import { useSpring, to, animated } from "react-spring";
+import { useSpring, animated, config } from "react-spring";
 import { useState } from "react";
 import { Button, Loader, MainContainer, TopContainer, blue, rotateOnHover, CenterContainer, BottomContainer } from "./App.style";
 import Card from "./component/Card";
@@ -39,16 +39,20 @@ const Card1 = () => {
 };
 
 function App() {
-	const makeFullscreen = () => {
-		console.log("sdvk");
-		document.requestFullscreen();
-	};
+	const [toggle, setToggle] = useState(false);
+	const fade = useSpring({
+		// from: { opacity: 0, transform: "scale(0)" },
+		opacity: toggle ? 1 : 0.5,
+
+		// delay: 100,
+		transform: toggle ? "scale(1)" : "scale(0.5)",
+		config: config.wobbly,
+	});
+
 	return (
 		<MainContainer>
 			<TopContainer>
-				<Button css={rotateOnHover} onClick={makeFullscreen}>
-					bouton 1
-				</Button>
+				<Button css={rotateOnHover}>bouton 1</Button>
 				<Button css={rotateOnHover}>bouton 2</Button>
 				<Button css={[blue, rotateOnHover]}>bouton 3</Button>
 			</TopContainer>
@@ -67,17 +71,20 @@ function App() {
 				>
 					<Loader />
 				</div>
-				<img
+				<animated.img
+					style={fade}
 					css={css`
 						height: 20vw;
+						position: relative;
 					`}
 					src="/img/unicorn-g325b486a1_1920.png"
 					alt="licorne"
-				></img>
-			</CenterContainer>
-			<BottomContainer>
+					onMouseEnter={() => setToggle(!toggle)}
+					onMouseLeave={() => setToggle(!toggle)}
+				></animated.img>
 				<Card />
-			</BottomContainer>
+			</CenterContainer>
+			<BottomContainer>{/* <Card /> */}</BottomContainer>
 		</MainContainer>
 	);
 }
