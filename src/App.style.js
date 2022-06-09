@@ -34,7 +34,7 @@ export const MainContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
+	max-height: 100vh;
 	box-sizing: border-box;
 	flex-direction: column;
 `;
@@ -108,4 +108,12 @@ export const Loader = styled.div`
 		border-top-color: rgb(192, 108, 125);
 		animation: ${spin} 1.5s linear infinite;
 	}
+`;
+
+export const cardChristele = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+	width: 100%;
 `;

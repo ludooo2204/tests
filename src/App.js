@@ -3,14 +3,15 @@ import { css, jsx } from "@emotion/react";
 import { useSpring, to, animated } from "react-spring";
 import { useState } from "react";
 import { Button, Loader, MainContainer, TopContainer, blue, rotateOnHover, CenterContainer, BottomContainer } from "./App.style";
-
+import Card from "./component/Card";
+import styled from "@emotion/styled";
 function App2() {
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 } });
 	console.log(props);
 	return <animated.div style={props}>I will fade in</animated.div>;
 }
 
-const Card = () => {
+const Card1 = () => {
 	return (
 		<section id="D-parallax-effect">
 			<div class="container-3D">
