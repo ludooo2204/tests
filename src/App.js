@@ -4,6 +4,7 @@ import { useSpring, animated, config } from "react-spring";
 import { useState } from "react";
 import { Button, Loader, MainContainer, TopContainer, blue, rotateOnHover, CenterContainer, BottomContainer } from "./App.style";
 import Card from "./component/Card";
+import { connect } from "react-redux";
 import styled from "@emotion/styled";
 function App2() {
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 } });
@@ -38,7 +39,7 @@ const Card1 = () => {
 	);
 };
 
-function App() {
+function App({ addInfo, info }) {
 	const [toggle, setToggle] = useState(false);
 	const fade = useSpring({
 		// from: { opacity: 0, transform: "scale(0)" },
@@ -48,13 +49,14 @@ function App() {
 		transform: toggle ? "scale(1)" : "scale(0.5)",
 		config: config.wobbly,
 	});
-
 	return (
 		<MainContainer>
 			<TopContainer>
 				<Button css={rotateOnHover}>bouton 1</Button>
 				<Button css={rotateOnHover}>bouton 2</Button>
-				<Button css={[blue, rotateOnHover]}>bouton 3</Button>
+				<Button onClick={addInfo} css={[blue, rotateOnHover]}>
+					bouton 3
+				</Button>
 			</TopContainer>
 			<CenterContainer>
 				<input type="text"></input>
@@ -82,6 +84,7 @@ function App() {
 					onMouseEnter={() => setToggle(!toggle)}
 					onMouseLeave={() => setToggle(!toggle)}
 				></animated.img>
+				{info}
 				<Card />
 			</CenterContainer>
 			<BottomContainer>{/* <Card /> */}</BottomContainer>
@@ -89,4 +92,12 @@ function App() {
 	);
 }
 
-export default App;
+const mapStateToProps = (state) => {
+	return { info: state.info };
+};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addInfo: () => dispatch({ type: "ADD_INFO", payload: "hello" }),
+	};
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
